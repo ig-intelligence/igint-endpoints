@@ -15,7 +15,7 @@ const datastore = Datastore({projectId: process.env.PROJECT_ID || 'ig-intelligen
 
 app.use(express.static(path.join(__dirname, 'static')));
 
-app.get('/:username', (req, res) => {
+app.get('/intel/:username', (req, res) => {
   const username = req.params.username;
 
   let user_id;
@@ -39,16 +39,16 @@ app.get('/:username', (req, res) => {
     })
 
     // 3. send a request to igint-scrape for the new posts
-    .then(latest_post => {
+    .then(entities => {
       debug('scraping for new posts');
 
       const options = {
         uri: process.env.IGINT_SCRAPE_ENDPOINT || 'http://localhost:3000/' + username
       };
 
-      if (latest_post.length !== 0) {
+      if (entities[0].length !== 0) {
         options.headers = {
-          'If-Range': new Date(latest_post[0][0].timestamp).toUTCString()
+          'If-Range': new Date(entities[0][0].timestamp).toUTCString()
         };
       }
 
@@ -80,11 +80,11 @@ app.get('/:username', (req, res) => {
           })
         )
         // 5. save the analysis results into cloud datastore
-          .then(new_analysed_posts => {
+          .then(analysed_posts => {
             debug('saving analysed posts to datastore');
 
             const upserts = [];
-            for (const post of new_analysed_posts) {
+            for (const post of analysed_posts) {
               const key = datastore.key([
                 'User',
                 user_id,
@@ -105,14 +105,27 @@ app.get('/:username', (req, res) => {
       }
     })
 
-    // 6. call igint-insights for insights
-    .then(() => new Promise((resolve, reject) => request.get({
-      uri: process.env.IGINT_INSIGHTS_ENDPOINT || 'http://localhost:4000/' + username
+
+    // 6. fetch all analysed_posts from datastore
+    .then(() => {
+      const ancestorKey = datastore.key(['User', user_id]);
+
+      const query = datastore.createQuery('AnalysedPost')
+        .hasAncestor(ancestorKey);
+
+      return datastore.runQuery(query);
+    })
+
+    // 7. send posts to igint-insights for insights
+    .then(entities => new Promise((resolve, reject) => request.post({
+      uri: process.env.IGINT_INSIGHTS_ENDPOINT || 'http://localhost:4000/insights/' + user_id,
+      body: entities[0],
+      json: true
     }, (err, resp, body) => {
       if (err) {
         return reject(err);
       } else if (resp.statusCode >= 400) {
-        return reject(err);
+        return reject(body);
       } else {
         return resolve(body);
       }
@@ -132,7 +145,9 @@ app.get('/:username', (req, res) => {
     });
 });
 
-const port = process.env.port || 3500;
+app.get('/version', (req, res) => res.send(require('./package.json').version));
+
+const port = process.env.PORT || 3500;
 
 app.listen(port, () => {
   debug(`Listening on port ${port}.`);
