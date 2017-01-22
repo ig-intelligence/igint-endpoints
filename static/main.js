@@ -11,7 +11,7 @@ $("#judgeButton").click(function(){
 
     console.log(result);
 
-    var jsonData = JSON.parse(result);
+    var jsonData = result;
     var htmlString = "";
     console.log(jsonData);
     for (var i = 0; i < jsonData.length; i++) {
@@ -19,7 +19,7 @@ $("#judgeButton").click(function(){
       htmlString += item;
     }
 
-    $(".results").html(htmlString);
+    $(".results").html(htmlString.replace(/Agrim/g, username));
 
   }, error: function(err) {
     $(".loader").hide();
