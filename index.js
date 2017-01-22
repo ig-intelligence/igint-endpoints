@@ -43,7 +43,7 @@ app.get('/intel/:username', (req, res) => {
       debug('scraping for new posts');
 
       const options = {
-        uri: process.env.IGINT_SCRAPE_ENDPOINT || 'http://localhost:3000/' + username
+        uri: (process.env.IGINT_SCRAPE_ENDPOINT || 'http://localhost:3000/') + username
       };
 
       if (entities[0].length !== 0) {
@@ -118,7 +118,7 @@ app.get('/intel/:username', (req, res) => {
 
     // 7. send posts to igint-insights for insights
     .then(entities => new Promise((resolve, reject) => request.post({
-      uri: process.env.IGINT_INSIGHTS_ENDPOINT || 'http://localhost:4000/insights/' + user_id,
+      uri: (process.env.IGINT_INSIGHTS_ENDPOINT || 'http://localhost:4000/insights/') + user_id,
       body: entities[0],
       json: true
     }, (err, resp, body) => {
