@@ -11,6 +11,53 @@
 
 </head>
 <body>
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Instagram Intelligence</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.css">
+  <link rel="stylesheet" href="./default.css">
+  <link rel="stylesheet" href="./component.css">
+  <link rel="stylesheet" href="./main.css">
+  </head>
+  <body>
+
+    <div class="my-container my-main">
+      <div class="header">
+        <h1>Instagram Intelligence</h1>
+        <h3>Are they worth following?!</h3>
+        <!-- content based analytics unlike what typical analytics advertizers care about (location, num likes). -->
+      </div>
+    </div>
+    <div class="wave-wrapper">
+      <img src="./wave.svg" alt="cool wave">
+    </div>
+    <div class="my-container">
+      <div class="start">
+        <span class="input input--kozakura">
+          <input class="input__field input__field--kozakura" type="text" id="input-7" />
+          <label class="input__label input__label--kozakura" for="input-7">
+            <span class="input__label-content input__label-content--kozakura" data-content="Instagram username">Instagram username</span>
+          </label>
+          <svg class="graphic graphic--kozakura" width="300%" height="100%" viewBox="0 0 1200 60" preserveAspectRatio="none">
+            <path d="M1200,9c0,0-305.005,0-401.001,0C733,9,675.327,4.969,598,4.969C514.994,4.969,449.336,9,400.333,9C299.666,9,0,9,0,9v43c0,0,299.666,0,400.333,0c49.002,0,114.66,3.484,197.667,3.484c77.327,0,135-3.484,200.999-3.484C894.995,52,1200,52,1200,52V9z"/>
+          </svg>
+        </span>
+      </div>
+      <div class="action">
+        <button id="judgeButton" class="btn btn-1 btn-1a">Judge!</button>
+      </div>
+      <div class="loader" style="display:none">Loading...</div>
+    </div>
+  </body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" charset="utf-8"></script>
+  <script src="./main.js" charset="utf-8"></script>
+  <script src="./classie.js" charset="utf-8"></script>
+  </html>
 
   <div class="container main">
     <div class="header">
