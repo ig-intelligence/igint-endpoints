@@ -1,0 +1,19 @@
+{
+  "name": "igint-endpoints",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jiayu Yi <yi-jiayu@users.noreply.github.com>",
+  "license": "ISC",
+  "dependencies": {
+    "@google-cloud/datastore": "^0.6.1",
+    "debug": "^2.6.0",
+    "express": "^4.14.0",
+    "instagram-scrape-account-stats": "0.0.0",
+    "morgan": "^1.7.0",
+    "request": "^2.79.0"
+  }
+}
