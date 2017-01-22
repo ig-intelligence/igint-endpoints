@@ -1,18 +1,18 @@
 @font-face {
   font-family: Raleway;
-  src: url(/static2/fonts/Raleway-Regular.ttf);
+  src: url(/static/fonts/Raleway-Regular.ttf);
   font-weight: normal;
   font-style: normal; }
 
   @font-face {
     font-family: Raleway;
-    src: url(/static2/fonts/Raleway-Bold.ttf);
+    src: url(/static/fonts/Raleway-Bold.ttf);
     font-weight: bold;
     font-style: bold; }
 
     @font-face {
       font-family: Raleway-Light;
-      src: url(/static2/fonts/Raleway-Light.ttf);
+      src: url(/static/fonts/Raleway-Light.ttf);
       font-style: normal; }
 
       * {
@@ -27,27 +27,32 @@
           body {
             background: #00d2ff;
             background: -webkit-linear-gradient(to left, #00d2ff, #3a7bd5);
-            background: linear-gradient(to left, #00d2ff, #3a7bd5); }
+            background: linear-gradient(to left, #00d2ff, #3a7bd5);
+            margin-bottom: 200px; }
 
-            .container {
+            .my-container {
               margin: 0 auto;
               max-width: 800px; }
 
-              .main {
+              .my-main {
                 margin-top: 100px; }
 
-                .header {
-                  padding-left: 1em;
-                  background: #bdc3c7;
-                  background: -webkit-linear-gradient(to left, #ECE9E6, #FFFFFF);
-                  background: linear-gradient(to left, #ECE9E6, #FFFFFF);
-                  -webkit-background-clip: text;
-                  -webkit-text-fill-color: transparent; }
-                  .header h1 {
-                    font-size: 2em;
-                    margin: 0; }
-                    .header h3 {
+                .results {
+                  color: white;
+                  padding: 15px; }
+
+                  .header {
+                    padding-left: 1em;
+                    background: #bdc3c7;
+                    background: -webkit-linear-gradient(to left, #ECE9E6, #FFFFFF);
+                    background: linear-gradient(to left, #ECE9E6, #FFFFFF);
+                    -webkit-background-clip: text;
+                    -webkit-text-fill-color: transparent; }
+                    .header h1 {
+                      font-size: 2em;
                       margin: 0; }
+                      .header h3 {
+                        margin: 0; }
 
 .start {
   margin: 0 auto; }
@@ -202,3 +207,53 @@
                                   fill: #fff;
                                   -webkit-transform: translate3d(-66.6%, 0, 0);
                                   transform: translate3d(-66.6%, 0, 0); }
+
+                                  .loader, .loader:before, .loader:after {
+                                    background: #ffffff;
+                                    -webkit-animation: load1 1s infinite ease-in-out;
+                                    animation: load1 1s infinite ease-in-out;
+                                    width: 1em;
+                                    height: 4em; }
+
+                                    .loader {
+                                      color: #ffffff;
+                                      text-indent: -9999em;
+                                      margin: 40px;
+                                      position: relative;
+                                      font-size: 11px;
+                                      -webkit-transform: translateZ(0);
+                                      -ms-transform: translateZ(0);
+                                      transform: translateZ(0);
+                                      -webkit-animation-delay: -0.16s;
+                                      animation-delay: -0.16s; }
+
+                                      .loader:before, .loader:after {
+                                        position: absolute;
+                                        top: 0;
+                                        content: ''; }
+
+                                        .loader:before {
+                                          left: -1.5em;
+                                          -webkit-animation-delay: -0.32s;
+                                          animation-delay: -0.32s; }
+
+                                          .loader:after {
+                                            left: 1.5em; }
+
+                                            @-webkit-keyframes load1 {
+                                              0%, 80%, 100% {
+                                                box-shadow: 0 0;
+                                                height: 4em;   }
+                                                40% {
+                                                  box-shadow: 0 -2em;
+                                                  height: 5em;   }
+}
+
+@keyframes load1 {
+  0%, 80%, 100% {
+    box-shadow: 0 0;
+    height: 4em;   }
+    40% {
+      box-shadow: 0 -2em;
+      height: 5em;   }
+}
